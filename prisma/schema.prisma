@@ -85,6 +85,7 @@ model Participant {
   id         String   @id @default(cuid())
   name       String
   email      String
+  value      Float?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   barbecueId String   @map("barbecue_id")
