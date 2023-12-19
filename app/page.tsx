@@ -1,9 +1,10 @@
 import Image from 'next/image'
-import { LoginForm } from './_components/login-form'
+import { LoginForm } from './components/login-form'
+import { cn } from '@/lib/utils'
 
 export default function Home() {
   return (
-    <main className="flex min-h-max flex-col items-center justify-between p-24">
+    <main className="flex min-h-max flex-col items-center justify-between p-8 ">
       {/* <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
@@ -29,9 +30,28 @@ export default function Home() {
         </div>
       </div> */}
 
-      <section className="w-full h-full pt-20">
-        <div className="container mx-auto px-6 py-12 md:px-0 md:py-0 h-full flex justify-center items-center">
-          <div className="md:w-7/12 lg:w-5/12 card-foreground rounded-md border border-input px-8 py-10 shadow-lg">
+      <h1 className="text-4xl font-extrabold text-center">
+        Bem-vindo ao Churras Trinca 🍖
+      </h1>
+      <p className="text-md text-center mt-4">
+        O sistema completo para gerenciar seu churras na Trinca! 🍺
+      </p>
+
+      <span className="text-xl text-center font-bold mt-6">
+        Faça seu login para continuar
+      </span>
+
+      <section className="h-full max-w-md w-full">
+        <div
+          className={cn(
+            'container mx-auto px-6 py-12 h-full flex justify-center items-center'
+          )}
+        >
+          <div
+            className={cn(
+              'w-full card-foreground rounded-md border border-input px-8 py-10 shadow-lg'
+            )}
+          >
             <LoginForm />
           </div>
         </div>

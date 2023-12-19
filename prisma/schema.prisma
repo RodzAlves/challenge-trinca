@@ -68,3 +68,25 @@ model VerificationRequest {
 
   @@unique([identifier, token])
 }
+
+model Barbecue {
+  id                      String        @id @default(cuid())
+  name                    String
+  description             String?
+  date                    DateTime
+  suggestedValue          Float?        @map("suggested_value")
+  suggestedValueWithDrink Float?        @map("suggested_value_with_drink")
+  createdAt               DateTime      @default(now())
+  updatedAt               DateTime      @updatedAt
+  participants            Participant[]
+}
+
+model Participant {
+  id         String   @id @default(cuid())
+  name       String
+  email      String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  barbecueId String   @map("barbecue_id")
+  barbecue   Barbecue @relation(fields: [barbecueId], references: [id])
+}

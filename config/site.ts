@@ -5,8 +5,8 @@ export const siteConfig = {
   description: 'O melhor lugar para gerenciar seu churras na Trinca!',
   mainNav: [
     {
-      title: 'Home',
-      href: '/',
+      title: 'Churrascos',
+      href: '/barbecue',
     },
   ],
   links: {

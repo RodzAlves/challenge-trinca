@@ -11,28 +11,48 @@ export async function getCurrentUser() {
 
   return {
     user: session?.user,
-    isAuthorized: !!session?.user,
+    isAuthenticated: !!session?.user,
   }
 }
 
 export const authOptions: NextAuthOptions = {
   // This is a temporary fix for prisma client.
   // @see https://github.com/prisma/prisma/issues/16117
-  adapter: PrismaAdapter(prisma),
-  pages: {
-    signIn: '/',
-  },
+  // pages: {
+  //   signIn: '/',
+  // },
   session: {
     strategy: 'jwt',
   },
+  logger: {
+    error(code, metadata) {
+      console.log({ type: 'inside error logger', code, metadata })
+    },
+    warn(code) {
+      console.log({ type: 'inside warn logger', code })
+    },
+    debug(code, metadata) {
+      console.log({ type: 'inside debug logger', code, metadata })
+    },
+  },
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    }),
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_CLIENT_ID as string,
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    // }),
     GitHubProvider({
-      clientId: process.env.GITHUB_ID as string,
-      clientSecret: process.env.GITHUB_SECRET as string,
+      clientId: process.env.GITHUB_CLIENT_ID as string,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+      profile(profile, tokens) {
+        console.log({ profile })
+
+        return {
+          id: profile.id,
+          name: profile.name,
+          email: profile.email,
+          image: profile.avatar_url,
+        }
+      },
     }),
     CredentialsProvider({
       name: 'Sign in',
@@ -46,6 +66,8 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
+        console.log({ credentials })
+
         if (!credentials?.email || !credentials.password) {
           return null
         }
@@ -102,5 +124,6 @@ export const authOptions: NextAuthOptions = {
       return token
     },
   },
-  // secret: process.env.NEXTAUTH_SECRET,
+  adapter: PrismaAdapter(prisma),
+  secret: process.env.NEXTAUTH_SECRET,
 }
