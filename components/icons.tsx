@@ -7,7 +7,23 @@ export const Icons = {
   sun: SunMedium,
   moon: Moon,
   twitter: Twitter,
-  logo: (props: LucideProps) => (
+  Spinner: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+    </svg>
+  ),
+  Logo: (props: LucideProps) => (
     <svg
       viewBox="0 0 80 80"
       fill="none"
@@ -15,8 +31,8 @@ export const Icons = {
       {...props}
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M80 67.166C80 74.254 74.254 80 67.166 80H12.834C5.746 80 0 74.254 0 67.166V12.834C0 5.746 5.746 0 12.834 0h54.332C74.254 0 80 5.746 80 12.834v54.332ZM20.374 26.7h-3.655v-2.41h10.024v2.41H23.06v9.692h-2.686V26.7Zm23.234 9.36h2.99v-.195l-3.322-4.015c2.326-.83 2.77-2.215 2.797-3.794 0-2.132-1.55-4.07-4.459-4.07h-5.732V36.06h2.687V32.1h1.938l3.101 3.96Zm-5.04-6.231v-3.517h3.047c1.246 0 1.772.997 1.8 1.827 0 .748-.527 1.69-1.773 1.69h-3.074Zm18.635 6.064V23.821h2.686v12.073h-2.686Zm-32.646 10.55.166 3.794-6.092-7.864h-2.326v12.073h2.741v-3.766l-.11-3.96 6.008 7.726h2.326V42.374h-2.713v4.07Zm21.82 6.093c-1.245 1.218-2.852 1.772-4.652 1.772-4.596 0-6.452-2.963-6.452-6.258-.027-3.13 2.022-6.397 6.452-6.397 1.662 0 3.185.637 4.431 1.855l-1.689 1.662c-.72-.72-1.772-.997-2.742-.997-2.74 0-3.82 2.132-3.793 3.877.027 1.772.969 3.766 3.793 3.766.97 0 2.243-.443 2.963-1.163l1.69 1.883Zm8.862.027h6.203l.886 2.077h2.907l-5.427-12.073h-2.935L51.445 54.64h2.908l.886-2.077Zm1.024-2.381 2.077-4.902 2.077 4.902h-4.154Z"
         fill={'#333'}
       ></path>
@@ -30,7 +46,7 @@ export const Icons = {
     //   />
     // </svg>
   ),
-  gitHub: (props: LucideProps) => (
+  Github: (props: LucideProps) => (
     <svg viewBox="0 0 438.549 438.549" {...props}>
       <path
         fill="currentColor"
