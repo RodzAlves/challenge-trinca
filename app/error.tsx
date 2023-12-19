@@ -4,6 +4,7 @@ import * as React from 'react'
 import { AlarmCheckIcon, ShieldAlert } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 export default function Error({
   error,
@@ -20,7 +21,11 @@ export default function Error({
   return (
     <main>
       <section className="bg-background">
-        <div className="layout flex min-h-screen flex-col items-center justify-center text-center text-black space-y-4">
+        <div
+          className={cn(
+            'layout flex h-full flex-col mt-4 items-center justify-center text-center text-black space-y-4'
+          )}
+        >
           <ShieldAlert
             size={60}
             className="drop-shadow-glow animate-flicker text-red-500"
