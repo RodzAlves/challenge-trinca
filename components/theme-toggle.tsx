@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
+import { Monitor } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
 import { Button } from '@/components/ui/button'
@@ -9,6 +10,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
@@ -25,14 +27,32 @@ export function ThemeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          Light
+        <DropdownMenuItem
+          className="cursor-pointer"
+          onClick={() => setTheme('light')}
+        >
+          Claro
+          <DropdownMenuShortcut>
+            <SunIcon className="h-[1.2rem] w-[1.2rem]" />
+          </DropdownMenuShortcut>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          Dark
+        <DropdownMenuItem
+          className="cursor-pointer"
+          onClick={() => setTheme('dark')}
+        >
+          Escuro
+          <DropdownMenuShortcut>
+            <MoonIcon className="h-[1.2rem] w-[1.2rem]" />
+          </DropdownMenuShortcut>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          System
+        <DropdownMenuItem
+          className="cursor-pointer"
+          onClick={() => setTheme('system')}
+        >
+          Sistema
+          <DropdownMenuShortcut>
+            <Monitor className="h-[1.2rem] w-[1.2rem]" />
+          </DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
