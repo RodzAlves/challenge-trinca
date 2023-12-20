@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma'
+import { NextApiRequest } from 'next'
 import { NextResponse } from 'next/server'
 
 interface BarbecuePayload {
@@ -9,36 +10,10 @@ interface BarbecuePayload {
   suggestedValueWithDrink: number
 }
 
-export async function GET() {
-  const barbecues = await prisma.barbecue.findMany({
-    include: {
-      participants: true,
-    },
-  })
-
-  const barbecuesWithIndicators = barbecues.map((barbecue) => {
-    const totalCollected = barbecue.participants.reduce((acc, curr) => {
-      return acc + (curr?.value ?? 0)
-    }, 0)
-
-    const totalParticipants = barbecue.participants.length
-
-    return {
-      ...barbecue,
-      totalParticipants,
-      totalCollected,
-    }
-  })
-
-  return NextResponse.json({
-    barbecues: barbecuesWithIndicators,
-  })
-}
-
-export async function POST(req: Request) {
+export async function POST(req: NextApiRequest) {
   try {
     const { name, date, description, suggestedValue, suggestedValueWithDrink } =
-      (await req.json()) as BarbecuePayload
+      req.body as BarbecuePayload
 
     const barbecue = await prisma.barbecue.create({
       data: {
@@ -50,8 +25,53 @@ export async function POST(req: Request) {
       },
     })
 
+    console.log(barbecue)
+
     return NextResponse.json({
       barbecue,
+    })
+  } catch (error: any) {
+    return new NextResponse(
+      JSON.stringify({
+        status: 'error',
+        message: error.message,
+      }),
+      { status: 500 }
+    )
+  }
+}
+
+export async function DELETE(req: NextApiRequest) {
+  console.log('received request')
+  const { id } = req.query
+
+  try {
+    const barbecue = await prisma.barbecue.findUnique({
+      where: {
+        id: id as string,
+      },
+    })
+
+    if (!barbecue) {
+      return new NextResponse(
+        JSON.stringify({
+          status: 'error',
+          message: 'Churrasco não encontrado!',
+        }),
+        { status: 404 }
+      )
+    }
+
+    await prisma.barbecue.delete({
+      where: {
+        id: id as string,
+      },
+    })
+
+    await prisma.participant.deleteMany({
+      where: {
+        barbecueId: id as string,
+      },
     })
   } catch (error: any) {
     return new NextResponse(
