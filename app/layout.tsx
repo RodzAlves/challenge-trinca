@@ -38,11 +38,11 @@ export default function RootLayout({
         <Providers>
           <div className="relative flex min-h-screen flex-col">
             <SiteHeader />
-            <div className="flex-1">{children}</div>
+            <div className="container flex-1">{children}</div>
+            <Toaster />
           </div>
           <TailwindIndicator />
           {/* <main>{children}</main> */}
-          <Toaster />
         </Providers>
       </body>
     </html>

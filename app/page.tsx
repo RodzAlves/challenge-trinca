@@ -1,8 +1,16 @@
 import Image from 'next/image'
 import { LoginForm } from './components/login-form'
 import { cn } from '@/lib/utils'
+import { getCurrentUser } from '@/lib/auth'
+import { redirect } from 'next/navigation'
 
-export default function Home() {
+export default async function Home() {
+  const { isAuthenticated } = await getCurrentUser()
+
+  if (isAuthenticated) {
+    redirect('/barbecue')
+  }
+
   return (
     <main className="flex min-h-max flex-col items-center justify-between p-8 ">
       {/* <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
