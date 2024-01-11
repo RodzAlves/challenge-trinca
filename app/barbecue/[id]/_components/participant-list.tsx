@@ -16,6 +16,12 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 import { toast } from '@/components/ui/use-toast'
 import { cn, formatCurrency } from '@/lib/utils'
 import { refreshAction } from '@/utils/refresh-action'
@@ -40,7 +46,7 @@ export function ParticipantList({ participants }: ParticipantListProps) {
     try {
       const response = await deleteParticipant(participantId)
 
-      if(response?.error) {
+      if (response?.error) {
         toast({
           variant: 'destructive',
           title: 'Oops! Aconteceu algo.',
@@ -138,7 +144,7 @@ export function ParticipantList({ participants }: ParticipantListProps) {
               aria-checked={isPaid}
               checked={isPaid}
               onCheckedChange={() => handlePay(id)}
-              disabled={isLoading}
+              disabled={isPaid || isLoading}
             />
             <label
               htmlFor="paid"
@@ -155,14 +161,25 @@ export function ParticipantList({ participants }: ParticipantListProps) {
             <div className="flex items-center space-x-1 text-sm text-card-foreground">
               {formatCurrency(amount)}
             </div>
-            <Button
-              type="button"
-              variant="link"
-              size="icon"
-              onClick={() => handleOpenConfirmDelete(id)}
-            >
-              <Trash className="w-6 h-6 text-destructive peer-disabled:cursor-not-allowed peer-disabled:opacity-70" />
-            </Button>
+
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button
+                    type="button"
+                    variant="link"
+                    size="icon"
+                    onClick={() => handleOpenConfirmDelete(id)}
+                  >
+                    <Trash className="w-6 h-6 text-destructive peer-disabled:cursor-not-allowed peer-disabled:opacity-70" />
+                  </Button>
+                </TooltipTrigger>
+
+                <TooltipContent>
+                  <p>Deletar participante</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
         </div>
       ))}

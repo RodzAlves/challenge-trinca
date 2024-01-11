@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,7 +15,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { toast } from '@/components/ui/use-toast'
 import { createUser } from '@/actions/user'
@@ -33,7 +32,6 @@ export function HomeForm() {
   const [isLogin, setIsLogin] = useState(true)
 
   const router = useRouter()
-  const searchParams = useSearchParams()
 
   const form = useForm<ValuesForm>({
     resolver: zodResolver(formSchema),
@@ -82,14 +80,13 @@ export function HomeForm() {
         return
       }
 
-      router.refresh()
-
       toast({
         title: 'Login realizado.',
         description: 'Bem vindo, comece a organizar seu churras!',
       })
 
       router.push('/barbecue')
+      router.refresh()
     } catch (error: any) {
       toast({
         variant: 'destructive',

@@ -100,7 +100,7 @@ export function BarbecueCard({
               </TooltipTrigger>
 
               <TooltipContent>
-                <p>Deletar participante</p>
+                <p>Deletar churrasco</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>

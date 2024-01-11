@@ -2,8 +2,6 @@ import { prisma } from '@/lib/prisma'
 import { compare } from 'bcryptjs'
 import { getServerSession, type NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import GitHubProvider from 'next-auth/providers/github'
-import GoogleProvider from 'next-auth/providers/google'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 
 export async function getCurrentUser() {

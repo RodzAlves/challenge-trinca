@@ -2,13 +2,10 @@ import Link from 'next/link'
 
 import { siteConfig } from '@/config/site'
 import { buttonVariants } from '@/components/ui/button'
-import { Icons } from '@/components/icons'
 import { MainNav } from '@/components/main-nav'
 import { ThemeToggle } from '@/components/theme-toggle'
-import { LinkedinIcon } from 'lucide-react'
 import { LinkedInLogoIcon } from '@radix-ui/react-icons'
 import { getCurrentUser } from '@/lib/auth'
-import { cn } from '@/lib/utils'
 import { UserNav } from './user-nav'
 
 export async function SiteHeader() {
