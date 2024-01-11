@@ -42,7 +42,6 @@ export default function RootLayout({
             <Toaster />
           </div>
           <TailwindIndicator />
-          {/* <main>{children}</main> */}
         </Providers>
       </body>
     </html>
