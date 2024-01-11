@@ -32,6 +32,11 @@ export function UserNav() {
 
   const avatarFallback = generateAvatarFallback(user?.name ?? '')
 
+  const handleSignOut = () => {
+    signOut()
+    router.push('/')
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -58,7 +63,7 @@ export function UserNav() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleSignOut}>Sair</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

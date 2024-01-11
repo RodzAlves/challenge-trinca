@@ -16,6 +16,12 @@ export async function getCurrentUser() {
 }
 
 export const authOptions: NextAuthOptions = {
+  pages: {
+    signIn: '/',
+    signOut: '/',
+    error: '/not-found',
+    verifyRequest: '/not-found',
+  },
   session: {
     strategy: 'jwt',
   },
