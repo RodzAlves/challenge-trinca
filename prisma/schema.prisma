@@ -90,5 +90,5 @@ model Participant {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   barbecueId String   @map("barbecue_id")
-  barbecue   Barbecue @relation(fields: [barbecueId], references: [id])
+  barbecue   Barbecue @relation(fields: [barbecueId], references: [id], onDelete: Cascade)
 }
