@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id            String    @id @default(uuid())
-  name          String
+  name          String?
   email         String?   @unique
   password      String?
   emailVerified DateTime? @map("email_verified")
@@ -85,7 +85,8 @@ model Participant {
   id         String   @id @default(cuid())
   name       String
   email      String
-  value      Float?
+  amount     Float    @default(0)
+  isPaid     Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   barbecueId String   @map("barbecue_id")
